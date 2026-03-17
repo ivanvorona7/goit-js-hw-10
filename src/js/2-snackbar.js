@@ -2,6 +2,7 @@ import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
 const form = document.querySelector('.form');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 form.addEventListener('submit', (event) => {
   event.preventDefault();
@@ -9,20 +10,25 @@ form.addEventListener('submit', (event) => {
   const delay = Number(form.elements.delay.value);
   const state = form.elements.state.value;
 
+  submitBtn.disabled = true;
+
   createPromise(delay, state)
     .then((delay) => {
       iziToast.success({
         title: 'Success',
-        message: ` Fulfilled promise in ${delay}ms`,
+        message: `Fulfilled promise in ${delay}ms`,
         position: 'topRight',
       });
     })
     .catch((delay) => {
       iziToast.error({
         title: 'Error',
-        message: ` Rejected promise in ${delay}ms`,
+        message: `Rejected promise in ${delay}ms`,
         position: 'topRight',
       });
+    })
+    .finally(() => {
+      submitBtn.disabled = false;
     });
 
   form.reset();
