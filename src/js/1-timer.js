@@ -3,7 +3,10 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 
+
 const startBtn = document.querySelector('[data-start]');
+startBtn.disabled = true; 
+
 const datetimePicker = document.getElementById('datetime-picker');
 
 const daysEl = document.querySelector('[data-days]');
@@ -66,9 +69,9 @@ function startTimer() {
 
     if (delta <= 0) {
       clearInterval(timerInterval);
-      updateTimerDisplay(0,0,0,0);
+      updateTimerDisplay(0, 0, 0, 0);
       datetimePicker.disabled = false;
-      startBtn.disabled = true;
+      startBtn.disabled = true; 
       return;
     }
 
